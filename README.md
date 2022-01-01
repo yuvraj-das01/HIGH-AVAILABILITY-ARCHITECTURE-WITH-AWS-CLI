@@ -18,11 +18,13 @@ CloudFront and using the origin domain as S3 bucket.
 - Finally place the Cloud Front URL on the
 webapp code for security and low latency.
 Let’s start:-
+
 STEP-1:- First install AWS CLI on your system. For working in the AWS CLI we have to first create one IAM user of our AWS account, this user will have their Access and Secret Key, using this keys we can log-in inside the our aws account from CLI. Command to log-in :-
 aws configure
 
 
 Here it will ask you first to provide Access Key ID of the user, then Secret Key ID, then region name means in which region(Mumbai-ap-south-1, etc) of AWS you wanna work, and then at last the output format means in which form you wanna see your command output(JSON, etc).
+
 STEP-2:- We are successfully log-in inside the our account using the IAM user. Now our first step is to launch the EC2-instance in the AWS. Using “aws help” command we can see all the services of the AWS.
 AWS EC2:- Amazon Elastic Compute Cloud (EC2) is a part of Amazon.com’s cloud-computing platform, Amazon Web Services (AWS), that allows users to rent virtual computers on which to run their own computer applications.
 #Command to launch the ec2-instance:-
@@ -54,11 +56,13 @@ Here we see that now our volume is in IN-USE state.
 
 
 Here you can see the new volume is connected with 10GB of size.
+
 STEP-5:- We have to configure the web-server on top of this instance, so if you are using Linux OS then using “yum” we can install the web-server. Command:
 yum install httpd
 
 
 Finally our web-server is installed.
+
 STEP-6:- Now For using any of the Block Storage, first we have to create partition of that storage, then have to format it and then we have to mount that storage to any of the directory of our instance. So let’s first create partition of this storage or volume.
 Inside the instance run this commands:-
 1- sudo su -root:- for log-in into the root account.
@@ -73,6 +77,7 @@ This will create partition of our volume.
 
 
 As we can see our volume is successfully mounted with the given directory.
+
 STEP-7:- Now we have to create the S3 Bucket for storing the static objects(Image, videos, etc) that we gonna use in our web pages.
 S3 Bucket:- S3 is a storage service offered by Amazon. It stands for simple storage service and provides cloud storage for various types of web development applications.
 Command to create the s3 bucket:-
@@ -83,13 +88,12 @@ Here I’m using taskwebserver as my bucket name and launching it in ap-south-1(
 
 
 Our bucket is successfully created.
+
 STEP-8:- Now we have to copy our Image from our Local computer to the S3 bucket. Command:-
 aws s3 cp LOCALPATH BUCKET_PATH — acl READ_ACCESS
 
-
-
-
 IMAGE is successfully copied inside the s3 bucket.
+
 STEP-9:- Now we have to Set-up Content Delivery Network using
 CloudFront and using the origin domain as S3 bucket.
 CloudFront:- Amazon CloudFront is a content delivery network (CDN) offered by Amazon Web Services. Content delivery networks provide a globally-distributed network of proxy servers which cache content, such as web videos or other bulky media, more locally to consumers, thus improving access speed for downloading the content.
